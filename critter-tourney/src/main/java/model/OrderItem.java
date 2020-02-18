@@ -8,6 +8,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * Represents a number of {@link Item}s for a specified {@link Order}
+ * 
+ * @author OceansFourteenth
+ * @see Item
+ *
+ */
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "orderId", "item_id" }) })
 public class OrderItem {
