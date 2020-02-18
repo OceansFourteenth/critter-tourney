@@ -11,7 +11,7 @@ import model.Item;
  */
 public interface IItemService {
 
-	public boolean createItem(Item item);
+	public Item createItem(Item item);
 	
 	public Item createItem(String name);
 

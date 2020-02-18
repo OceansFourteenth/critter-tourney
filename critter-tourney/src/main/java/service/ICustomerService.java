@@ -11,7 +11,7 @@ import model.Customer;
  */
 public interface ICustomerService {
 
-	public boolean createCustomer(Customer customer);
+	public Customer createCustomer(Customer customer);
 	
 	public Customer createCustomer(String email, String firstName, String lastName);
 
