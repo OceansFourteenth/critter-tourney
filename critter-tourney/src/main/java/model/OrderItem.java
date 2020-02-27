@@ -32,6 +32,14 @@ public class OrderItem {
 	/**
 	 * @param order
 	 * @param item
+	 */
+	public OrderItem(Order order, Item item) {
+		this(order, item, 1);
+	}
+
+	/**
+	 * @param order
+	 * @param item
 	 * @param quantity
 	 */
 	public OrderItem(Order order, Item item, int quantity) {
@@ -85,7 +93,7 @@ public class OrderItem {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(item, order, quantity);
+		return Objects.hash(item, order);
 	}
 
 	@Override
@@ -97,7 +105,7 @@ public class OrderItem {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderItem other = (OrderItem) obj;
-		return Objects.equals(item, other.item) && Objects.equals(order, other.order) && quantity == other.quantity;
+		return Objects.equals(item, other.item) && Objects.equals(order, other.order);
 	}
 
 	@Override
