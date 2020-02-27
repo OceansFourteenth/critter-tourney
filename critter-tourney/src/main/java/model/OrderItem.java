@@ -5,8 +5,18 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+/**
+ * Represents a number of {@link Item}s for a specified {@link Order}
+ * 
+ * @author OceansFourteenth
+ * @see Item
+ *
+ */
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "orderId", "item_id" }) })
 public class OrderItem {
 
 	@ManyToOne
@@ -18,6 +28,14 @@ public class OrderItem {
 	private Item item;
 
 	private int quantity;
+
+	/**
+	 * @param order
+	 * @param item
+	 */
+	public OrderItem(Order order, Item item) {
+		this(order, item, 1);
+	}
 
 	/**
 	 * @param order
@@ -75,7 +93,7 @@ public class OrderItem {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(item, order, quantity);
+		return Objects.hash(item, order);
 	}
 
 	@Override
@@ -87,7 +105,7 @@ public class OrderItem {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderItem other = (OrderItem) obj;
-		return Objects.equals(item, other.item) && Objects.equals(order, other.order) && quantity == other.quantity;
+		return Objects.equals(item, other.item) && Objects.equals(order, other.order);
 	}
 
 	@Override
