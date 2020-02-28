@@ -6,11 +6,11 @@ import model.Order;
 
 public interface IOrderService {
 
-	public Order createOrder(Customer customer);
+	public Order createOrder(Customer customer) throws IllegalArgumentException;
 
-	public boolean addItem(Order order, Item item, int quantity);
+	public boolean addItem(Order order, Item item, int quantity) throws IllegalArgumentException;
 
-	public boolean removeItem(Order order, Item item);
+	public boolean removeItem(Order order, Item item) throws IllegalArgumentException;
 
-	public boolean updateItem(Order order, Item item, int newQuantity);
+	public boolean updateItem(Order order, Item item, int newQuantity) throws IllegalArgumentException;
 }
