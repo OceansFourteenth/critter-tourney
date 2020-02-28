@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public Customer createCustomer(String email, String firstName, String lastName) {
-		if (email == null || email.length() < 5)
+		if (email == null || email.length() == 0)
 			return null;
 		if (firstName == null || firstName.length() == 0)
 			return null;
