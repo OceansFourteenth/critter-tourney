@@ -13,31 +13,46 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public Order createOrder(Customer customer) {
 		if (customer == null)
-			return null;
+			throw new IllegalArgumentException("Customer cannot be null");
 
 		return orderDao.createOrder(customer);
 	}
 
 	@Override
 	public boolean addItem(Order order, Item item, int quantity) {
-		if (order == null || item == null || quantity <= 0)
-			return false;
+		if (order == null)
+			throw new IllegalArgumentException("Order cannot be null");
+
+		if (item == null)
+			throw new IllegalArgumentException("Item cannot be null");
+
+		if (quantity <= 0)
+			throw new IllegalArgumentException("Quantity must be positive value");
 
 		return orderDao.addItem(order, item, quantity);
 	}
 
 	@Override
 	public boolean removeItem(Order order, Item item) {
-		if (order == null || item == null)
-			return false;
+		if (order == null)
+			throw new IllegalArgumentException("Order cannot be null");
+
+		if (item == null)
+			throw new IllegalArgumentException("Item cannot be null");
 
 		return orderDao.removeItem(order, item);
 	}
 
 	@Override
 	public boolean updateItem(Order order, Item item, int newQuantity) {
-		if (order == null || item == null || newQuantity <= 0)
-			return false;
+		if (order == null)
+			throw new IllegalArgumentException("Order cannot be null");
+
+		if (item == null)
+			throw new IllegalArgumentException("Item cannot be null");
+
+		if (newQuantity <= 0)
+			throw new IllegalArgumentException("Quantity must be positive value");
 
 		return orderDao.updateItem(order, item, newQuantity);
 	}

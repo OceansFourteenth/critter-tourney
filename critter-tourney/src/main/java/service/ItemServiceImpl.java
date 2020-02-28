@@ -18,7 +18,7 @@ public class ItemServiceImpl implements IItemService {
 	@Override
 	public Item createItem(Item item) {
 		if (item == null)
-			return null;
+			throw new IllegalArgumentException("Item cannot be null");
 
 		return itemDao.createItem(item);
 	}
@@ -26,13 +26,13 @@ public class ItemServiceImpl implements IItemService {
 	@Override
 	public Item createItem(String name, String description, double price) {
 		if (name == null || name.length() == 0)
-			return null;
+			throw new IllegalArgumentException("Name must be non-null, non-empty string");
 
 		if (description == null || description.length() == 0)
-			return null;
+			throw new IllegalArgumentException("Description must be non-null, non-empty string");
 
 		if (price <= 0)
-			return null;
+			throw new IllegalArgumentException("Price must be a positive value");
 
 		return itemDao.createItem(name, description, price);
 	}
@@ -40,11 +40,11 @@ public class ItemServiceImpl implements IItemService {
 	@Override
 	public Item getByName(String name) {
 		if (name == null || name.length() == 0)
-			return null;
+			throw new IllegalArgumentException("Name must be non-null, non-empty string.");
 
 		return itemDao.getByName(name);
 	}
-
+	
 	@Override
 	public Item getById(long id) {
 		return itemDao.getById(id);
