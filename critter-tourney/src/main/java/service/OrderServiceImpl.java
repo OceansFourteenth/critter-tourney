@@ -5,6 +5,7 @@ import dao.OrderDaoImpl;
 import model.Customer;
 import model.Item;
 import model.Order;
+import model.OrderItem;
 
 public class OrderServiceImpl implements IOrderService {
 
@@ -29,7 +30,10 @@ public class OrderServiceImpl implements IOrderService {
 		if (quantity <= 0)
 			throw new IllegalArgumentException("Quantity must be positive value");
 
-		return orderDao.addItem(order, item, quantity);
+		if (orderDao.addItem(order, item, quantity))
+			return order.add(new OrderItem(order, item, quantity));
+		else
+			return false;
 	}
 
 	@Override
@@ -40,7 +44,10 @@ public class OrderServiceImpl implements IOrderService {
 		if (item == null)
 			throw new IllegalArgumentException("Item cannot be null");
 
-		return orderDao.removeItem(order, item);
+		if (orderDao.removeItem(order, item))
+			return order.remove(new OrderItem(order, item));
+		else
+			return false;
 	}
 
 	@Override
@@ -54,7 +61,10 @@ public class OrderServiceImpl implements IOrderService {
 		if (newQuantity <= 0)
 			throw new IllegalArgumentException("Quantity must be positive value");
 
-		return orderDao.updateItem(order, item, newQuantity);
+		if (orderDao.updateItem(order, item, newQuantity))
+			return order.remove(new OrderItem(order, item)) && order.add(new OrderItem(order, item, newQuantity));
+		else
+			return false;
 	}
 
 }
