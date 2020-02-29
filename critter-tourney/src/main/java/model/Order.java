@@ -3,12 +3,16 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author brain
@@ -25,12 +29,17 @@ public class Order {
 	@JoinColumn(name = "customerId", referencedColumnName = "id")
 	private Customer customer;
 
+	@OneToMany(orphanRemoval = true)
+	@JoinColumn(name = "orderId")
+	private List<OrderItem> orderItems;
+
 	/**
 	 * @param customer
 	 */
 	public Order(Customer customer) {
 		super();
 		this.customer = customer;
+		this.orderItems = new ArrayList<OrderItem>();
 	}
 
 	/**
@@ -59,6 +68,49 @@ public class Order {
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 * @see java.util.List#add(java.lang.Object)
+	 */
+	public boolean add(OrderItem item) {
+		return orderItems.add(item);
+	}
+
+	/**
+	 * 
+	 * @see java.util.List#clear()
+	 */
+	public void clear() {
+		orderItems.clear();
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 * @see java.util.List#contains(java.lang.Object)
+	 */
+	public boolean contains(OrderItem item) {
+		return orderItems.contains(item);
+	}
+
+	/**
+	 * @return
+	 * @see java.util.List#isEmpty()
+	 */
+	public boolean isEmpty() {
+		return orderItems.isEmpty();
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 * @see java.util.List#remove(java.lang.Object)
+	 */
+	public boolean remove(OrderItem item) {
+		return orderItems.remove(item);
 	}
 
 	@Override
