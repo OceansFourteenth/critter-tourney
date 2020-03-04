@@ -1,7 +1,7 @@
 package service;
 
 import dao.IOrderDao;
-import dao.OrderDaoImpl;
+import dao.OrderDaoJpaImpl;
 import model.Customer;
 import model.Item;
 import model.Order;
@@ -9,7 +9,7 @@ import model.OrderItem;
 
 public class OrderServiceImpl implements IOrderService {
 
-	private IOrderDao orderDao = new OrderDaoImpl();
+	private IOrderDao orderDao = new OrderDaoJpaImpl();
 
 	@Override
 	public Order createOrder(Customer customer) {

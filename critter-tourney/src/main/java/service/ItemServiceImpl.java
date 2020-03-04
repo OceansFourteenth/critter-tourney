@@ -4,7 +4,7 @@
 package service;
 
 import dao.IItemDao;
-import dao.ItemDaoImpl;
+import dao.ItemDaoJpaImpl;
 import model.Item;
 
 /**
@@ -13,7 +13,7 @@ import model.Item;
  */
 public class ItemServiceImpl implements IItemService {
 
-	private IItemDao itemDao = new ItemDaoImpl();
+	private IItemDao itemDao = new ItemDaoJpaImpl();
 
 	@Override
 	public Item createItem(Item item) {

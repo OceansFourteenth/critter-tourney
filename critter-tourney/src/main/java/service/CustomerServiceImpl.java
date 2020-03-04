@@ -3,7 +3,7 @@
  */
 package service;
 
-import dao.CustomerDaoImpl;
+import dao.CustomerDaoJpaImpl;
 import dao.ICustomerDao;
 import model.Customer;
 
@@ -13,7 +13,7 @@ import model.Customer;
  */
 public class CustomerServiceImpl implements ICustomerService {
 
-	private ICustomerDao customerDao = new CustomerDaoImpl();
+	private ICustomerDao customerDao = new CustomerDaoJpaImpl();
 
 	@Override
 	public Customer createCustomer(Customer customer) throws IllegalArgumentException {
