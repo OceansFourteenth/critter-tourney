@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
  * @author brain
  *
  */
-@Entity
+@Entity(name = "Ord") // 'order' is a reserved keyword in JPQL
 public class Order {
 
 	@Id
@@ -26,12 +26,15 @@ public class Order {
 	private long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customerId", referencedColumnName = "id")
+	@JoinColumn(name = "customerId")
 	private Customer customer;
 
 	@OneToMany(orphanRemoval = true)
 	@JoinColumn(name = "orderId")
 	private List<OrderItem> orderItems;
+
+	public Order() {
+	}
 
 	/**
 	 * @param customer

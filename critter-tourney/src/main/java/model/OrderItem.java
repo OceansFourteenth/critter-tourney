@@ -1,12 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 /**
  * Represents a number of {@link Item}s for a specified {@link Order}
@@ -16,18 +16,29 @@ import javax.persistence.UniqueConstraint;
  *
  */
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "orderId", "item_id" }) })
-public class OrderItem {
+//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "orderId", "itemId" }) })
+public class OrderItem implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4029752492746503675L;
 
 	@ManyToOne
-	@JoinColumn(name = "orderId", referencedColumnName = "id")
+	@JoinColumn(name = "orderId")
+	@Id
 	private Order order;
 
 	@ManyToOne
-	@JoinColumn(name = "item_id")
+	@JoinColumn(name = "itemId")
+	@Id
 	private Item item;
 
 	private int quantity;
+
+	public OrderItem() {
+
+	}
 
 	/**
 	 * @param order
