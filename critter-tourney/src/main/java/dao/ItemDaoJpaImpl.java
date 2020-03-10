@@ -3,8 +3,9 @@
  */
 package dao;
 
+import static dao.util.JpaUtil.getEntityManager;
+
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,8 @@ import model.Item;
 @Transactional
 public class ItemDaoJpaImpl implements IItemDao {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+//	@PersistenceContext
+	private final EntityManager entityManager = getEntityManager();
 
 	@Override
 	public Item createItem(Item item) {
